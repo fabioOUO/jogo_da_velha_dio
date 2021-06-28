@@ -3,7 +3,7 @@ let selectedPlayer = 0;
 let started = false;
 let players = [
     {
-        name: "player",
+        name: "Player",
         option: "O",
         ponts: 0
     },{
@@ -14,21 +14,36 @@ let players = [
 ]; /* player or computer */
 
 function updatePlayerInformation(){
-    document.getElementById("playerPonts").innerHTML = players[0].name +": "+players[0].ponts+" ponts";
-    document.getElementById("computerPonts").innerHTML = players[1].name +": "+players[1].ponts+" ponts";
+    document.getElementById("playerPonts").innerHTML = players[0].name + ": " + players[0].ponts + (players[0].ponts > 1? " pontos": " ponto");
+    document.getElementById("computerPonts").innerHTML = players[1].name + ": " + players[1].ponts  + (players[0].ponts > 1? " pontos": " ponto");
 }
+
 /* start all vars */
 function startVars(){
     for (let c = 0; c < 9; c++) {
         cells[c] = "";
     }
     selectedPlayer = 0;
-    
     players[0].name = document.getElementById("name").value;
     players[0].option = document.getElementById("option").value;
-
     players[0].option == "O"? players[1].option = "X": players[1].option = "O"; 
     updatePlayerInformation();    
+}
+
+/* cleck cells */
+function checkCells(idCell1, idCell2, idCell3, option){
+    return (cells[idCell1] == option && cells[idCell2] == option && cells[idCell3] == option);
+}
+
+/* check all options */
+function checkAllCells(idPlayer){
+    const option = players[idPlayer].option;
+    for (let c = 0; c < 3; c++) {
+        if(checkCells(0+(c*3), 1+(c*3), 2+(c*3), option)){return true}/* column */
+        if(checkCells(0+c, 3+c, 6+c, option)){return true} /* row */
+    }
+    if(checkCells(0, 4, 8, option)){return true}/* cross */
+    if(checkCells(2, 4, 6, option)){return true}/* cross */
 }
 
 /* check cell cliked */
@@ -38,9 +53,9 @@ function clickCell(numberCell){
         cell.setAttribute("class", "cell full");
         cell.innerHTML = players[0].option;
         if(0 < numberCell < 10) cells[numberCell-1] = players[0].option;
-        //checkCell();
-    }else{
-        alert("Coloque seu nome e aperte o botão iniciar.")
+        if(checkAllCells(0)) alert("Parabens "+players[0].name+" você ganhou!");
+        generatePositionComputer();
+        checkAllCells(1);
     }
 }
 
@@ -77,5 +92,6 @@ function restart(){
     hide("playerInformation");
     hide("buttonRestart");
 }
+document.getElementById("name").value = players[0].name;
 hide("playerInformation");
 hide("buttonRestart");
