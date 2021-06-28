@@ -29,7 +29,6 @@ body {
 .container-button-restart {
   margin-bottom: 10px;
 }
-
 /* title */
 
 .title {
@@ -55,12 +54,38 @@ body {
   background-color: #ffffff;
   color: #000000;
 }
+
+.full {
+  background-color: #000088;
+}
 /* display player*/
 
-.display-player {
+.display-player,
+#playerdata {
+  display: flex;
+  flex-direction: column;
   margin: 10px;
   color: #aaaaaa;
   font-size: 2rem;
+}
+
+#playerdata {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #505050;
+  border-radius: 4px;
+}
+#playerdata p {
+  margin: 5px;
+}
+#playerdata input {
+  width: 100px;
+}
+
+#playerInformation {
+  display: flex;
+  flex-direction: column;
 }
 
 /* button */

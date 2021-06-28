@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/main.css">
-    <script src="js/main.js" type="text/javascript"></script>
+    <script defer src="js/main.js" type="text/javascript"></script>
     <title>Jogo da Velha</title>
 </head>
 <body>
@@ -18,28 +18,46 @@
         <div class="container">
             <div class="container-game">
                 <div id="line1">
-                    <div class="cell empty" id="box1">1</div>
-                    <div class="cell empty" id="box2">2</div>
-                    <div class="cell empty" id="box3">3</div>
+                    <div class="cell empty" id="1" onclick="clickCell(1)">1</div>
+                    <div class="cell empty" id="2" onclick="clickCell(2)">2</div>
+                    <div class="cell empty" id="3" onclick="clickCell(3)">3</div>
                 </div>
                 <div id="line2">
-                    <div class="cell empty" id="box4">4</div>
-                    <div class="cell empty" id="box5">5</div>
-                    <div class="cell empty" id="box6">6</div>
+                    <div class="cell empty" id="4" onclick="clickCell(4)">4</div>
+                    <div class="cell empty" id="5" onclick="clickCell(5)">5</div>
+                    <div class="cell empty" id="6" onclick="clickCell(6)">6</div>
                 </div>
                 <div id="line3">
-                    <div class="cell empty" id="box7">7</div>
-                    <div class="cell empty" id="box8">8</div>
-                    <div class="cell empty" id="box9">9</div>
+                    <div class="cell empty" id="7" onclick="clickCell(7)">7</div>
+                    <div class="cell empty" id="8" onclick="clickCell(8)">8</div>
+                    <div class="cell empty" id="9" onclick="clickCell(9)">9</div>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="display-player">
-                <p>Jogador: <span id="selectedPlayer"></span></p>
-                <p>Vencedor: <span id="punctuationPlayer"></span></p>
+                <div id="playerdata">
+                    <p>Nome: <input type="text" id="name" class="name"></p>
+                    <p>
+                        Jogar com: 
+                        <select name="option" id="option">
+                            <option value="O" selected>O</option>
+                            <option value="X">X</option>
+                        </select>    
+                    </p>
+                    <p>
+                        <button class="btn" id="start" onclick="start()">
+                            Iniciar
+                        </button>
+                    </p>
+                </div>
+                <div id="playerInformation">
+                    <p id="playerPonts"></p>
+                    <p id="computerPonts"></p>
+                </div>
+                
             </div>
-            <div class="container-button-restart">
+            <div class="container-button-restart" id="buttonRestart">
                 <button class="btn" id="restart" onclick="restart()">
                     Reiniciar
                 </button>
