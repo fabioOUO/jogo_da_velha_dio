@@ -18,19 +18,19 @@
         <div class="container">
             <div class="container-game">
                 <div id="line1">
-                    <div id="box1">1</div>
-                    <div id="box2">2</div>
-                    <div id="box3">3</div>
+                    <div class="cell empty" id="box1">1</div>
+                    <div class="cell empty" id="box2">2</div>
+                    <div class="cell empty" id="box3">3</div>
                 </div>
                 <div id="line2">
-                    <div id="box4">4</div>
-                    <div id="box5">5</div>
-                    <div id="box6">6</div>
+                    <div class="cell empty" id="box4">4</div>
+                    <div class="cell empty" id="box5">5</div>
+                    <div class="cell empty" id="box6">6</div>
                 </div>
                 <div id="line3">
-                    <div id="box7">7</div>
-                    <div id="box8">8</div>
-                    <div id="box9">9</div>
+                    <div class="cell empty" id="box7">7</div>
+                    <div class="cell empty" id="box8">8</div>
+                    <div class="cell empty" id="box9">9</div>
                 </div>
             </div>
         </div>
@@ -39,7 +39,7 @@
                 <p>Jogador: <span id="selectedPlayer"></span></p>
                 <p>Vencedor: <span id="punctuationPlayer"></span></p>
             </div>
-            <div>
+            <div class="container-button-restart">
                 <button class="btn" id="restart" onclick="restart()">
                     Reiniciar
                 </button>
