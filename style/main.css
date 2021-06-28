@@ -58,6 +58,9 @@ body {
 .full {
   background-color: #000088;
 }
+.victory {
+  background-color: #008800;
+}
 /* display player*/
 
 .display-player,
