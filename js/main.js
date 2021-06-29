@@ -7,31 +7,21 @@ function updatePlayerInformation(){
     document.getElementById("computerPonts").innerHTML = players[1].name + ": " + players[1].ponts  + (players[0].ponts > 1? " pontos": " ponto");
 }
 
-
 function resetCells(){
     const elements =  document.getElementsByClassName("cell");
     for (let c = 0; c < 9; c++) {
         cells[c] = {position:c, option:""};
         elements[c].setAttribute("class", "cell empty");
         elements[c].innerHTML = "";
-
     }
-
 }
 
 /* start all vars */
 function startVars(){
     resetCells();
     players = [
-        {
-            name: "Player",
-            option: "O",
-            ponts: 0
-        },{
-            name: "Computador",
-            option: "X",
-            ponts: 0
-        }
+        {name: "Player", option: "O", ponts: 0},
+        {name: "Computador",option: "X",ponts: 0}
     ]; /* player or computer */
     players[0].name = document.getElementById("name").value;
     players[0].option = document.getElementById("option").value;
@@ -78,14 +68,13 @@ function newGame(){
     show("playerInformation");
     show("buttonRestart");
     started = true;
-    movements = 9;
-    
+    movements = 9;   
 }
 
 /* check cell cliked */
 function clickCell(numberCell){
     if(started){
-        if(movements > 0){
+        if(movements > 0 && cells[numberCell].option == ""){
             setCell(numberCell, players[0].option); /* create cell user */
             if(checkAllCells(0)){
                 players[0].ponts++;
@@ -105,6 +94,10 @@ function clickCell(numberCell){
                     started = false;
                 }
             }
+        }
+        if(movements == 0 && started){
+            alert("Empate!");
+            newGame();
         }
     }
 }
