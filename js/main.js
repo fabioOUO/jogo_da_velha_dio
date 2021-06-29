@@ -7,11 +7,21 @@ function updatePlayerInformation(){
     document.getElementById("computerPonts").innerHTML = players[1].name + ": " + players[1].ponts  + (players[0].ponts > 1? " pontos": " ponto");
 }
 
+
+function resetCells(){
+    const elements =  document.getElementsByClassName("cell");
+    for (let c = 0; c < 9; c++) {
+        cells[c] = {position:c, option:""};
+        elements[c].setAttribute("class", "cell empty");
+        elements[c].innerHTML = "";
+
+    }
+
+}
+
 /* start all vars */
 function startVars(){
-    for (let c = 0; c < 9; c++) {
-        cells[c] = {position: c, option:""};
-    }
+    resetCells();
     players = [
         {
             name: "Player",
@@ -58,8 +68,18 @@ function setCell(idCell, option){
         cell.innerHTML = option;
         cells[idCell].option = option;
         movements--;
-        console.log(movements);
     }
+}
+
+function newGame(){
+    resetCells();
+    updatePlayerInformation();
+    hide("playerdata");
+    show("playerInformation");
+    show("buttonRestart");
+    started = true;
+    movements = 9;
+    
 }
 
 /* check cell cliked */
@@ -67,11 +87,23 @@ function clickCell(numberCell){
     if(started){
         if(movements > 0){
             setCell(numberCell, players[0].option); /* create cell user */
-            setTimeout(function(){if(checkAllCells(0)){players[0].ponts++; alert("Parabens "+players[0].name+" você ganhou!");}}, 100);
+            if(checkAllCells(0)){
+                players[0].ponts++;
+                alert("Parabens "+players[0].name+" você ganhou!");
+                document.getElementById("newGame").style.display = "block";
+                movements = 0;
+                started = false;
+            }
             if(movements > 0){
                 const position = generatePositionComputer();
                 setCell(position, players[1].option); /* create cell computer */
-                setTimeout(function(){if(checkAllCells(1)){players[1].ponts++; alert("Infelizmente você perdeu!");}}, 100);
+                if(checkAllCells(1)){
+                    players[1].ponts++;
+                    alert("Infelizmente você perdeu!");
+                    document.getElementById("newGame").style.display = "block";
+                    movements = 0;
+                    started = false;
+                }
             }
         }
     }
@@ -103,12 +135,16 @@ function start(){
     show("buttonRestart");   
     startVars();
     started = true;
+    document.getElementById("newGame").style.display = "none";
 }
 /* restart game */
 function restart(){
     show("playerdata");
     hide("playerInformation");
     hide("buttonRestart");
+    movements = 9;
+    started = true;
+    resetCells();
 }
 document.getElementById("name").value = "Player";
 hide("playerInformation");
